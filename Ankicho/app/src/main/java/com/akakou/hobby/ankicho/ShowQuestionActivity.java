@@ -31,6 +31,7 @@ public class ShowQuestionActivity extends AppCompatActivity {
 
     public void onClick(View v) {
         Intent intent = new Intent(this, ShowAnswerActivity.class);
+        intent.putExtra("question", ankichoWord.question);
         intent.putExtra("answer", ankichoWord.answer);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);

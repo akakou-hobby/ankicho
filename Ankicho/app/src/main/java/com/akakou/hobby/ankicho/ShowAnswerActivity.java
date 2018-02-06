@@ -10,6 +10,7 @@ import ankicho.AnkichoController;
 
 public class ShowAnswerActivity extends AppCompatActivity {
     String answer = "";
+    String question = "";
     AnkichoController ankichoController = AnkichoController.getInstance();
 
     @Override
@@ -17,9 +18,13 @@ public class ShowAnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_answer);
 
-        // 正答の表示
+        // 問題と正答の表示
         Intent intent = getIntent();
+        question = intent.getStringExtra("question");
         answer = intent.getStringExtra("answer");
+
+        TextView questionTextView = (TextView)findViewById(R.id.question_text);
+        questionTextView.setText(question);
         TextView answerTextView = (TextView)findViewById(R.id.answer_text);
         answerTextView.setText(answer);
     }
