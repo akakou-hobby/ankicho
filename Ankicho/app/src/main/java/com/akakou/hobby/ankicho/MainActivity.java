@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -44,31 +45,12 @@ public class MainActivity extends AppCompatActivity {
             Uri uri = data.getData();
 
             File file = new File(uri.getPath());
-
-            BufferedReader reader = null;
-            StringBuilder builder = new StringBuilder();
             try {
-                reader = new BufferedReader(new InputStreamReader(getContentResolver().openInputStream(uri)));
-                String line = "";
-
-                while ((line = reader.readLine()) != null) {
-                    builder.append(line);
-                    builder.append('\n');
-                }
-
-            } catch (IOException e) {
+                InputStream inputStream  = getContentResolver().openInputStream(uri);
+                ankichoWordFactory.setBody(inputStream);
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            } finally {
-                if (reader != null){
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             }
-
-            ankichoWordFactory.setBody(builder.toString());
 
             Intent intent = new Intent(this, ShowQuestionActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

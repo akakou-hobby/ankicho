@@ -5,7 +5,11 @@ import android.widget.Toast;
 
 import com.akakou.hobby.ankicho.ShowQuestionActivity;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +22,7 @@ import java.util.List;
 public class AnkichoWordFactory {
     private static AnkichoWordFactory singleton = new AnkichoWordFactory();
     private String plain_text = null;
+    private InputStream inputStream = null;
 
     private AnkichoWordFactory(){}
 
@@ -30,10 +35,28 @@ public class AnkichoWordFactory {
         return singleton;
     }
 
-    public void setBody(String text){
-        if (this.plain_text == null){
-            this.plain_text = text;
+    public boolean setBody(InputStream inputstream){
+        if (plain_text == null){
+
+            BufferedReader reader = null;
+            StringBuilder builder = new StringBuilder();
+            try {
+                reader = new BufferedReader(new InputStreamReader(inputstream));
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
+                    builder.append('\n');
+                }
+                plain_text = builder.toString();
+                return true;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
         }
+        return false;
     }
 
     /**
