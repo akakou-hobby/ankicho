@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import ankicho.AnkichoController;
+import ankicho.AnkichoWord;
 
 public class ShowAnswerActivity extends AppCompatActivity {
-    String answer = "";
-    String question = "";
+    AnkichoWord ankichoWord;
     AnkichoController ankichoController = AnkichoController.getInstance();
 
     @Override
@@ -20,13 +20,12 @@ public class ShowAnswerActivity extends AppCompatActivity {
 
         // 問題と正答の表示
         Intent intent = getIntent();
-        question = intent.getStringExtra("question");
-        answer = intent.getStringExtra("answer");
+        ankichoWord = (AnkichoWord) intent.getSerializableExtra("word");
 
         TextView questionTextView = (TextView)findViewById(R.id.question_text);
-        questionTextView.setText(question);
+        questionTextView.setText(ankichoWord.question);
         TextView answerTextView = (TextView)findViewById(R.id.answer_text);
-        answerTextView.setText(answer);
+        answerTextView.setText(ankichoWord.answer);
     }
 
     public void onClick(View v) {

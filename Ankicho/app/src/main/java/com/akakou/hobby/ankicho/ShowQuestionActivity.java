@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 import ankicho.AnkichoController;
 import ankicho.AnkichoWord;
 
@@ -31,8 +33,7 @@ public class ShowQuestionActivity extends AppCompatActivity {
 
     public void onClick(View v) {
         Intent intent = new Intent(this, ShowAnswerActivity.class);
-        intent.putExtra("question", ankichoWord.question);
-        intent.putExtra("answer", ankichoWord.answer);
+        intent.putExtra("word", ankichoWord);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
