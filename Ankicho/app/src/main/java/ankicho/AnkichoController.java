@@ -18,7 +18,7 @@ public class AnkichoController {
 
     public boolean has_more_word = true;
 
-    AnkichoWordFactory ankichoWordFactory = new AnkichoWordFactory();
+    AnkichoWordFactory ankichoWordFactory = AnkichoWordFactory.getInstance();
 
 
     /**
