@@ -30,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    public void onClick(View v) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("text/csv");
         if (intent.resolveActivity(getPackageManager()) != null) {
